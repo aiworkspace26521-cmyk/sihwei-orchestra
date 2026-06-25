@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高雄市四維國小管弦樂團營運說明書</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #e0e7ff;
+            --primary-dark: #3730a3;
+            --secondary: #0ea5e9;
+            --success: #10b981;
+            --success-light: #ecfdf5;
+            --warning: #f59e0b;
+            --warning-light: #fef3c7;
+            --danger: #ef4444;
+            --danger-light: #fef2f2;
+            --dark: #0f172a;
+            --gray-dark: #334155;
+            --gray-light: #f8fafc;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+            background-color: #f1f5f9;
+            color: var(--gray-dark);
+            line-height: 1.7;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 320px;
+            background-color: var(--dark);
+            color: white;
+            padding: 2.5rem 1.5rem;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
+            box-shadow: 4px 0 25px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .sidebar-brand {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1.5rem;
+        }
+
+        .sidebar-brand h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a5b4fc, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+
+        .sidebar-brand p {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 0.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-item a:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .nav-item.active a {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        /* Main content layout */
+        .main-wrapper {
+            margin-left: 320px;
+            flex: 1;
+            padding: 3rem;
+            max-width: 1100px;
+        }
+
+        /* Header area */
+        .main-header {
+            background: linear-gradient(135deg, var(--dark), var(--primary-dark));
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-header ::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+        }
+
+        .main-header h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
+        }
+
+        .main-header p {
+            color: #e2e8f0;
+            font-size: 1.1rem;
+            max-width: 700px;
+        }
+
+        /* Content Sections */
+        section {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            scroll-margin-top: 2rem;
+        }
+
+        h3.section-title {
+            font-size: 1.6rem;
+            color: var(--dark);
+            border-left: 5px solid var(--primary);
+            padding-left: 0.75rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+        }
+
+        /* Custom Alert Boxes */
+        .alert {
+            padding: 1.25rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+            font-size: 0.95rem;
+        }
+
+        .alert-important {
+            background-color: var(--danger-light);
+            border-left-color: var(--danger);
+            color: #991b1b;
+        }
+
+        .alert-tip {
+            background-color: var(--success-light);
+            border-left-color: var(--success);
+            color: #065f46;
+        }
+
+        .alert-info {
+            background-color: #f0f9ff;
+            border-left-color: var(--secondary);
+            color: #0369a1;
+        }
+
+        .alert-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Responsive HTML Org Chart */
+        .org-chart-container {
+            width: 100%;
+            margin: 2rem 0;
+            background-color: var(--gray-light);
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+            font-family: inherit;
+        }
+
+        .org-node {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+            text-align: center;
+            position: relative;
+            transition: var(--transition);
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .org-node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+        }
+
+        .org-node-president {
+            background: linear-gradient(135deg, var(--dark), var(--primary-dark));
+            color: white;
+            border: none;
+            max-width: 320px;
+        }
+
+        .org-node-president h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .org-node-president p {
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            margin-bottom: 0;
+        }
+
+        /* Connecting lines */
+        .org-line-vertical {
+            width: 2px;
+            height: 20px;
+            background-color: #cbd5e1;
+            position: relative;
+        }
+
+        .org-line-vertical::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #cbd5e1;
+        }
+
+        .org-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+        }
+
+        .org-node-pillar {
+            border-top: 4px solid var(--primary);
+            max-width: 100%;
+        }
+
+        .org-node-pillar h4 {
+            font-size: 1.05rem;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .org-node-pillar .subtitle {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .org-node-pillar .highlight {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 700;
+            background-color: var(--primary-light);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .org-divider-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            font-weight: 700;
+            background-color: #cbd5e1;
+            color: var(--dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            margin: 0.5rem 0;
+            letter-spacing: 0.5px;
+        }
+
+        .org-sections {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            width: 100%;
+            max-width: 950px;
+        }
+
+        .org-node-section {
+            padding: 0.85rem 0.75rem;
+            max-width: 100%;
+        }
+
+        .org-node-section h4 {
+            font-size: 0.95rem;
+            color: var(--dark);
+            margin-bottom: 0.35rem;
+            font-weight: 700;
+        }
+
+        .org-node-section .desc {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .org-node-section .badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            width: 100%;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Specific section border and badge colors */
+        .sec-1 { border-top: 4px solid var(--primary); }
+        .sec-1 .badge { background-color: var(--primary-light); color: var(--primary-dark); }
+
+        .sec-2 { border-top: 4px solid var(--secondary); }
+        .sec-2 .badge { background-color: #e0f2fe; color: #0369a1; }
+
+        .sec-3 { border-top: 4px solid var(--success); }
+        .sec-3 .badge { background-color: var(--success-light); color: #047857; }
+
+        .sec-4 { border-top: 4px solid var(--warning); }
+        .sec-4 .badge { background-color: var(--warning-light); color: #b45309; }
+
+        .org-note-box {
+            width: 100%;
+            max-width: 950px;
+            background-color: var(--primary-light);
+            border: 1px solid #c7d2fe;
+            color: var(--primary-dark);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Responsive styling for HTML Org Chart */
+        @media (max-width: 991px) {
+            .org-pillars {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+            .org-sections {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .org-pillars {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            .org-node-pillar {
+                max-width: 280px;
+                margin: 0 auto;
+            }
+            .org-sections {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            .org-node-section {
+                max-width: 280px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Timeline styling */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1rem 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--primary-light);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: -8px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            top: 24px;
+            border-radius: 50%;
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .timeline-item.left {
+            left: 0;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+        }
+
+        .timeline-item.right::after {
+            left: -8px;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            background-color: var(--gray-light);
+            position: relative;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-content h4 {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timeline-content h4 .time-badge {
+            background-color: var(--primary);
+            color: white;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            color: var(--gray-dark);
+            line-height: 1.5;
+        }
+
+        .timeline-content .details {
+            list-style: none;
+            margin-left: 0;
+            padding-left: 0;
+            font-size: 0.85rem;
+        }
+
+        .timeline-content .details li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.35rem;
+            color: #475569;
+            text-align: left;
+        }
+
+        .timeline-content .details li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+            top: -2px;
+        }
+
+        /* Responsive timeline */
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 55px;
+                padding-right: 15px;
+            }
+            .timeline-item.left {
+                left: 0;
+            }
+            .timeline-item.right {
+                left: 0;
+            }
+            .timeline-item::after {
+                left: 23px;
+                right: auto;
+            }
+            .timeline-item.right::after {
+                left: 23px;
+            }
+        }
+
+        /* Tables styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: var(--dark);
+            color: white;
+            font-weight: 600;
+            text-align: left;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:hover td {
+            background-color: var(--gray-light);
+        }
+
+        /* List styling */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-list {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .highlight-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* Step layout */
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 1.5rem;
+            background-color: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .step-badge {
+            background-color: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-family: 'Outfit', sans-serif;
+            box-shadow: 0 4px 8px rgba(79, 70, 229, 0.2);
+        }
+
+        .step-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        /* Printable optimization */
+        .print-btn {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .print-btn:hover {
+            background-color: #059669;
+            transform: translateY(-1px);
+        }
+
+        /* Responsive styling */
+        @media (max-width: 991px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                position: static;
+                width: 100%;
+                padding: 1.5rem;
+            }
+            .main-wrapper {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-header {
+                padding: 1.5rem;
+            }
+            .main-header h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Print media styling */
+        @media print {
+            body {
+                background-color: white;
+                color: black;
+                display: block;
+            }
+            .sidebar, .print-btn {
+                display: none !important;
+            }
+            .main-wrapper {
+                margin-left: 0 !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+            .main-header {
+                background: none !important;
+                color: black !important;
+                border: 1px solid black !important;
+                border-radius: 0 !important;
+                padding: 1.5rem !important;
+                box-shadow: none !important;
+            }
+            .main-header p {
+                color: black !important;
+            }
+            section {
+                box-shadow: none !important;
+                border: none !important;
+                border-bottom: 1px solid #94a3b8 !important;
+                border-radius: 0 !important;
+                padding: 1.5rem 0 !important;
+                page-break-inside: avoid;
+            }
+            .org-chart-container {
+                background-color: white !important;
+                border: 1px solid black !important;
+            }
+            .org-node {
+                box-shadow: none !important;
+                border: 1px solid black !important;
+                background-color: white !important;
+                color: black !important;
+            }
+            .org-node-president {
+                background: none !important;
+                color: black !important;
+                border: 2px solid black !important;
+            }
+            .org-node-president p {
+                color: black !important;
+            }
+            .org-node-pillar .highlight {
+                background-color: #f1f5f9 !important;
+                border: 1px solid black !important;
+                color: black !important;
+            }
+            .org-node-section .badge {
+                background-color: #f1f5f9 !important;
+                border: 1px solid black !important;
+                color: black !important;
+            }
+            .org-note-box {
+                background-color: white !important;
+                border: 1px solid black !important;
+                color: black !important;
+            }
+            /* Timeline print styling */
+            .timeline::after {
+                background-color: #cbd5e1 !important;
+            }
+            .timeline-item::after {
+                border-color: black !important;
+                background-color: white !important;
+            }
+            .timeline-content {
+                background-color: white !important;
+                border: 1px solid black !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
+            .timeline-content h4 .time-badge {
+                background-color: #e2e8f0 !important;
+                color: black !important;
+                border: 1px solid black !important;
+            }
+            .timeline-content .details li::before {
+                color: black !important;
+            }
+            th {
+                background-color: #e2e8f0 !important;
+                color: black !important;
+                border: 1px solid black !important;
+            }
+            td {
+                border: 1px solid black !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h1>四維國小管弦樂團</h1>
+            <p>家長後援會營運手冊</p>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item active"><a href="#vision">一、 樂團管理願景</a></li>
+            <li class="nav-item"><a href="#structure">二、 扁平組織架構</a></li>
+            <li class="nav-item"><a href="#cycle">三、 樂團年度活動週期</a></li>
+            <li class="nav-item"><a href="#pillars">四、 三大行政支柱</a></li>
+            <li class="nav-item"><a href="#sections">五、 聲部自治與活動承包</a></li>
+            <li class="nav-item"><a href="#sop">六、 招生與甄選 SOP</a></li>
+            <li class="nav-item"><a href="#toolkit">七、 營運實戰工具包</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="main-header">
+            <h2>高雄市四維國小管弦樂團營運說明書</h2>
+            <p>家長後援會自治、行政中樞管控與聲部承包實務指南</p>
+            <div style="margin-top: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                <button class="print-btn" onclick="window.print()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    列印此報告 (Ctrl + P)
+                </button>
+                <span style="font-size: 0.85rem; color: #cbd5e1;">適合直接匯出 PDF 做實體交接</span>
+            </div>
+        </div>
+
+        <!-- Section 1 -->
+        <section id="vision">
+            <h3 class="section-title">一、 樂團管理願景與核心原則</h3>
+            <p>高雄市四維國小管弦樂團成立於1999年，是由校內喜愛音樂的孩子們所組成。為確保樂團在有限的家長志工人力下，能高效推進樂團事務，並在「年度成果發表會 (6月)」與「全國學生音樂比賽 (11月)」取得卓越成果，本手冊依循以下四大管理原則編撰：</p>
+            
+            <ul class="highlight-list">
+                <li><strong>以始為終 (Begin with the End in Mind)：</strong> 所有日常行政、排練安排、資源配置，皆以年度兩大成果發表為專案終點，進行倒推排程，確保所有準備工作在關鍵節點（Milestones）準時完成。</li>
+                <li><strong>扁平化與去中心化：</strong> 取消副會長等虛設職務，由「會長」直轄三大行政組，進行極度扁平化的溝通與敏捷決策。</li>
+                <li><strong>三大行政支柱：</strong> 建立「財務組 (錢)」、「活動統籌組 (事/物)」與「學務組 (人/行政)」三大行政中樞，提供樂團運作的穩固日常架構。</li>
+                <li><strong>全員認領與聲部承包：</strong> 家長依據孩子所就讀之樂器聲部，自動歸入所屬聲部，平日進行「聲部自治」；大型活動當天，各聲部整組變形轉職，集體承包特定的後勤區域，消除「我只是來幫忙的」旁觀者心態，實現 100% 的主體責任感。</li>
+            </ul>
+            
+            <div class="alert alert-info">
+                <div class="alert-title">💡 樂團年度運作「雙核心里程碑」導讀</div>
+                後援會以始為終的所有專案排程與家長承包制度，皆環繞著年度兩大高峰任務運作：
+                <ul style="margin: 0.5rem 0 0 1.25rem; font-size: 0.9rem; list-style-type: disc;">
+                    <li><strong>【11月 全國學生音樂比賽（市賽）】</strong> ➔ 樂團首度出征，家長啟動大活動後勤承包，全力護航。</li>
+                    <li><strong>【6月 年度成果發表會（公演）】</strong> ➔ 樂團年度最大盛事，至德堂公演現場全員變形承包。</li>
+                </ul>
+                <div style="font-size: 0.8rem; margin-top: 0.5rem; color: #0369a1; font-weight: bold;">
+                    *(詳細一整年的活動週期與各月份分工時程表，請參閱「三、樂團年度活動週期」章節)*
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section id="structure">
+            <h3 class="section-title">二、 扁平組織架構與人員編制</h3>
+            <p>後援會取消所有課務與橫向冗贅小組，由會長直轄財務、活動、學務三大行政組，並由這三組對接底下的四大聲部組：</p>
+            
+            <!-- Responsive HTML/CSS Org Chart (Fully stable in LINE and mobile browsers) -->
+            <div class="org-chart-container">
+                <div class="org-chart">
+                    <!-- Level 1: President -->
+                    <div class="org-node org-node-president">
+                        <h4>後援會會長 (1人)</h4>
+                        <p>總決策、校方對接窗口</p>
+                    </div>
+                    
+                    <!-- Connector line -->
+                    <div class="org-line-vertical"></div>
+                    
+                    <!-- Level 2: Pillars (Administrative Middle Layer) -->
+                    <div class="org-pillars">
+                        <!-- Card 1: Finance -->
+                        <div class="org-node org-node-pillar">
+                            <h4>財務組 (2人)</h4>
+                            <div class="subtitle">主計崗 1人 / 出納崗 1人</div>
+                            <div class="highlight">專職「錢」：預算與透明核銷</div>
+                        </div>
+                        
+                        <!-- Card 2: Events -->
+                        <div class="org-node org-node-pillar">
+                            <h4>活動統籌組 (1-2人)</h4>
+                            <div class="subtitle">專案進度管控、外部廠商對接</div>
+                            <div class="highlight">專職「事與物」：大活動現場指揮官</div>
+                        </div>
+                        
+                        <!-- Card 3: Academic -->
+                        <div class="org-node org-node-pillar">
+                            <h4>學務組 (1-2人)</h4>
+                            <div class="subtitle">出缺席、請假、公假與保險對接</div>
+                            <div class="highlight">專職「人與行政」：招生與指揮助理</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Divider & Label -->
+                    <div class="org-divider-label">對接四大日常聲部（大活動承包制）</div>
+                    <div class="org-line-vertical"></div>
+                    
+                    <!-- Level 3: Sections (Execution Layer) -->
+                    <div class="org-sections">
+                        <!-- Section 1 -->
+                        <div class="org-node org-node-section sec-1">
+                            <h4>弦樂一部組 (小一)</h4>
+                            <div class="desc">📍 發表會變形後勤職：</div>
+                            <div class="badge">後台照護與生活後勤</div>
+                        </div>
+                        
+                        <!-- Section 2 -->
+                        <div class="org-node org-node-section sec-2">
+                            <h4>弦樂二部組 (小二/中)</h4>
+                            <div class="desc">📍 發表會變形後勤職：</div>
+                            <div class="badge">前台公關與票務宣傳</div>
+                        </div>
+                        
+                        <!-- Section 3 -->
+                        <div class="org-node org-node-section sec-3">
+                            <h4>大/低音提琴部</h4>
+                            <div class="desc">📍 發表會變形後勤職：</div>
+                            <div class="badge">舞台硬體與物流</div>
+                        </div>
+                        
+                        <!-- Section 4 -->
+                        <div class="org-node org-node-section sec-4">
+                            <h4>管樂打擊部</h4>
+                            <div class="desc">📍 發表會變形後勤職：</div>
+                            <div class="badge">機動調度與廠商對接</div>
+                        </div>
+                    </div>
+
+                    <!-- Explanatory note -->
+                    <div class="org-note-box">
+                        💡 日常運作：家長以「聲部」自治維繫；大活動當天：由「活動統籌組」統一指揮各聲部執行承包任務
+                    </div>
+                </div>
+            </div>
+            
+            <div class="alert alert-important">
+                <div class="alert-title">⚠️ 全員認領原則</div>
+                沒有人可以當「無職稱的幫忙者」。每位家長在入團第一天，便自動依孩子聲部歸入上述四大聲部之一，並同意履行該聲部承包的大活動後勤責任。
+            </div>
+        </section>
+
+        <!-- Section 3: Timeline -->
+        <section id="cycle">
+            <h3 class="section-title">三、 樂團年度活動里程碑與雙軌週期</h3>
+            <p>樂團年度活動秉持「以始為終」原則，以「11月 全國學生音樂比賽」與「6月 年度公演發表」為雙核心專案進行倒推排程。以下為後援會一整年的年度活動週期 (Cycle) 與各行政中樞主導職掌：</p>
+            
+            <div class="timeline">
+                <!-- Item 1 -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4>
+                            <span>學年啟動與比賽集訓期</span>
+                            <span class="time-badge">9-10月</span>
+                        </h4>
+                        <p>召開後援會開學家長大會，完成組織編制與家長排班登記，正式啟動樂團年度運作。</p>
+                        <ul class="details">
+                            <li><strong>學務組主導</strong>：建立全團 Master Database、排定家長義務值班輪值表。</li>
+                            <li><strong>財務組主導</strong>：收取第一學期團費與校內樂器租借押金，核算新學年師資開銷預算。</li>
+                            <li><strong>聲部自治</strong>：各聲部代表發放練習樂譜，排定學生自主保養樂器日程。</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h4>
+                            <span>全國學生音樂比賽（市賽）</span>
+                            <span class="time-badge">11月</span>
+                        </h4>
+                        <p>年度核心成果發表之一。全體家長大活動當日變形轉職承包，為孩子們打造最堅實的後勤防線。</p>
+                        <ul class="details">
+                            <li><strong>學務組主導</strong>：對接輔導室辦理參賽學生公假、點名、投保團體意外險、核對參賽證件。</li>
+                            <li><strong>活動組主導</strong>：租賃大貨車與遊覽車，協調往返動線，擔任現場指揮官調度各聲部職責。</li>
+                            <li><strong>家長承包制</strong>：四大聲部各就其位（弦一部後台照護、弦二部證件發放、大提打擊舞台物流、管樂賽場時間催台與引導）。</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4>
+                            <span>新生招募宣傳與寒訓籌辦</span>
+                            <span class="time-badge">12-1月</span>
+                        </h4>
+                        <p>雙軌並進。啟動下學年度新團員招募計畫，同時為寒假集訓進行前置籌辦。</p>
+                        <ul class="details">
+                            <li><strong>學務組主導</strong>：撰寫招生簡章，送輔導室核准發文至校內二至四年級各班，設計線上報名表。</li>
+                            <li><strong>前台宣傳(弦二)承包</strong>：自主設計電子招募海報、文宣，並透過 FB 及 LINE 社群進行廣泛宣傳。</li>
+                            <li><strong>活動組主導</strong>：協調寒假集訓場地租用、規劃集訓日程、預訂集訓餐點與保險。</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h4>
+                            <span>新團員甄選與新生報到</span>
+                            <span class="time-badge">2月</span>
+                        </h4>
+                        <p>舉辦新團員甄選，並完成新生報到與後援會編制登錄，為樂團注入新血。</p>
+                        <ul class="details">
+                            <li><strong>學務組主導</strong>：主導甄選報到與現場引導，統計評審分數並公告錄取名單，發放新生報到須知。</li>
+                            <li><strong>財務組主導</strong>：新生報到當日設立財務台，收取新生團費與樂器押金。</li>
+                            <li><strong>家長加入編制</strong>：新生家長簽署《聲部認領與義務同意書》，依孩子就讀聲部正式編入後援會日常自治群組。</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Item 5 -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4>
+                            <span>年度發表會籌備與文宣美編</span>
+                            <span class="time-badge">3-5月</span>
+                        </h4>
+                        <p>年度最大公演專案進入籌備期。所有廠商合約與宣傳物資在關鍵節點完成交付。</p>
+                        <ul class="details">
+                            <li><strong>活動組主導</strong>：對接高雄文化中心至德堂等場地；完成音響、錄影、攝像等廠商簽約與比價。</li>
+                            <li><strong>前台公關(弦二)承包</strong>：自主設計公演主視覺、美編海報、音樂會節目單及邀請函。</li>
+                            <li><strong>學務組主導</strong>：確認演出團員名冊、對接輔導室協調排練教室，辦理集訓與總彩排時間異動公文。</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Item 6 -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h4>
+                            <span>年度成果發表會（公演）</span>
+                            <span class="time-badge">6月</span>
+                        </h4>
+                        <p>年度公演專案執行。全體家長現場全戰位防守，各聲部變形轉職承包核心場域，呈現最專業的音樂盛宴。</p>
+                        <ul class="details">
+                            <li><strong>活動組主導</strong>：擔任發表會現場總指揮，對接至德堂舞監，掌控彩排與演出流程。</li>
+                            <li><strong>家長承包制</strong>：弦一部（後台生活照護與膳食）、弦二部（大廳索票與貴賓接待）、大提打擊（大型樂器大貨車裝卸與上台物流）、管樂（催台與技術廠商現場對接）。</li>
+                            <li><strong>財務組主導</strong>：公演現場票務金流控管、廠商尾款支付，並完成本學年財務報告編列。</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Item 7 -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4>
+                            <span>暑期休整與後援會幹部交接</span>
+                            <span class="time-badge">7-8月</span>
+                        </h4>
+                        <p>辦理財務公開，移交幹部工作包（SOP 01-04），輔導新任幹部上任，同時籌辦暑期集訓。</p>
+                        <ul class="details">
+                            <li><strong>財務組主導</strong>：於家長群公開全學年財務收支明細，移交公帳戶與實體帳冊印章。</li>
+                            <li><strong>全體幹部</strong>：進行完整的交接流程，傳承工作包，防止經驗流失。</li>
+                            <li><strong>會長/活動組主導</strong>：籌辦暑期集訓，安排外聘分部指導老師時程，為新學年的比賽打底。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4 -->
+        <section id="pillars">
+            <h3 class="section-title">四、 三大行政支柱（中間層）詳細職責</h3>
+            <p>三大行政組是樂團的「大腦與神經」，平日維持樂團的日常行政，大活動時作為核心控制台：</p>
+            
+            <div class="step-container">
+                <div class="step-item">
+                    <div class="step-badge">1</div>
+                    <div class="step-content">
+                        <h4>財務組 (Finance Team) ─ 專職「錢」</h4>
+                        <p>負責建立會計帳目、管理公帳戶、審核發票收據、編列學年預算案。實行出納（管現金）與主計（記帳）分離。<strong>每月最後一天，必須將「雲端收支明細表」公開至家長群組，確保財務 100% 透明。</strong></p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-badge">2</div>
+                    <div class="step-content">
+                        <h4>活動統籌組 (Events Team) ─ 專職「事、物、視覺」</h4>
+                        <p>負責大活動前夕及當天作為<strong>現場總指揮</strong>，協調各聲部職位。對外負責與場地、遊覽車、大貨車、音響/錄影廠商談判合約。督導專案進度，確保如海報設計、樂器搬運表等按時完成。</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-badge">3</div>
+                    <div class="step-content">
+                        <h4>學務組 (Academic Team) ─ 專職「人與行政對接」</h4>
+                        <p>負責維護樂團學生通訊錄（Master Database）、出缺席統計與請假單。對接學校輔導室，撰寫公文、申請「學生比賽/公演公假單」、辦理排練教室借用。主導招生與甄選、新生報到。辦理意外保險與大會報名。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5 -->
+        <section id="sections">
+            <h3 class="section-title">五、 四大聲部日常自治與大活動承包</h3>
+            <p>平日，家長在所屬聲部進行「日常自治」；大活動（比賽/公演）當天，各聲部依據物理場域，整組變形為特定後勤組：</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>團員就讀聲部</th>
+                        <th>大活動當日轉職組別</th>
+                        <th>核心職責與大活動當天戰位</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🎻 弦樂一部</strong><br>(小提琴一)</td>
+                        <td><span style="color: var(--primary); font-weight: bold;">【後台照護與生活後勤組】</span></td>
+                        <td>守在後台休息室。負責學生便當/點心發放、協助換裝、補妝、維持後台秩序安全，防止學生脫隊。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🎻 弦樂二部</strong><br>(小/中提琴)</td>
+                        <td><span style="color: var(--secondary); font-weight: bold;">【前台公關與票務宣傳組】</span></td>
+                        <td>守在場館大廳. 公演前自主美編設計海報與節目單；當天負責前台索票、貴賓接待簽到、引導入場。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🎸 大/低提與打擊樂部</strong></td>
+                        <td><span style="color: var(--success); font-weight: bold;">【舞台硬體與物流組】</span></td>
+                        <td>守在側台與卸貨區。負責大貨車樂器裝卸、舞台椅子/譜架擺放與大型樂器上下台調度（爸爸首選）。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🎺 管樂聲部</strong></td>
+                        <td><span style="color: var(--warning); font-weight: bold;">【機動調度與廠商對接組】</span></td>
+                        <td>守在側台。負責現場催台、帶隊走位、協助音響與錄影廠商現場電源對接。</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-tip">
+                <div class="alert-title">💡 日常聲部自治工作</div>
+                平日各聲部的「聲部代表」負責在該聲部 Line 群內通訊，排定平日與集訓時的「家長義務輪值值班表」（每位家長每學期義務值班 1-2 次，負責開關排練室、備妥飲水與小急救箱）。
+            </div>
+        </section>
+
+        <!-- Section 6 -->
+        <section id="sop">
+            <h3 class="section-title">六、 新團員招募與甄選標準作業流程 (SOP)</h3>
+            <p>每年 12月 至 2月 為招生與甄選期，學務組與活動組應營格執行以下流程以確保平滑過渡：</p>
+            
+            <div class="step-container">
+                <div class="step-item">
+                    <div class="step-badge">A</div>
+                    <div class="step-content">
+                        <strong>招生宣傳階段 (12月 - 1月)：</strong>
+                        <p>學務組撰寫招生簡章、送學校對接發文。前台公關組 (弦二部) 自主設計電子招募海報並於社群發布。大提/打擊組清點學校出租樂器庫存。</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-badge">B</div>
+                    <div class="step-content">
+                        <strong>報名與前置階段 (1月)：</strong>
+                        <p>學務組製作 Google 線上報名表、整理名單。活動統籌組協調場地，排定甄選梯次與評審時間。</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-badge">C</div>
+                    <div class="step-content">
+                        <strong>甄選當日 (2月上旬)：</strong>
+                        <p>學務組 (弦一部協助) 設立考生報到處、核對身分、引導進入準備室。大提/打擊組佈置考場椅子譜架。活動統籌組控管現場流程。</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-badge">D</div>
+                    <div class="step-content">
+                        <strong>新生報到 (2月下旬)：</strong>
+                        <p>學務組統計分數、簽報公告錄取名單。新生報到日，財務組於現場收取團費與樂器租借押金。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7 -->
+        <section id="toolkit">
+            <h3 class="section-title">七、 後援會高效營運實戰工具包</h3>
+            <p>為將管理工時壓縮至最低，後援會必須徹底實施數位化管理，拒絕重覆性手工勞動：</p>
+            
+            <ul class="highlight-list">
+                <li><strong>LINE 官方帳號與群組分流：</strong> 家長大群組設定為「唯讀公告群」（重要訊息置於記事本），平日禁言、禁發問候圖，避免訊息洗版。排班與值班溝通則在各聲部小群組內進行。</li>
+                <li><strong>Google Sheets 財務透明化：</strong> 財務組長使用 Google 試算表即時記帳，其「唯讀分享連結」永久置於家長大群公告欄，達成 100% 財務公開， any 家長皆可隨時點開對帳。</li>
+                <li><strong>Google Sheets 家長線上排班表：</strong> 每學期初由學務組發布排班表連結，家長依方便的時間段自行登記，額滿自動鎖定，省去人工協調時間。</li>
+                <li><strong>工作包 (Job Package) SOP 化傳承：</strong> 大提琴搬運、至德堂前台接待、招生甄選引導等皆已有獨立的圖文 SOP。新幹部上任只需「傳遞 PDF 檔案」即可直接上手，免去口耳相傳的流失。</li>
+            </ul>
+        </section>
+
+        <div style="text-align: center; margin-top: 3rem; color: #94a3b8; font-size: 0.85rem;">
+            <p>© 高雄市四維國小管弦樂團家長後援會. All Rights Reserved. 手冊版本: Ver. 8.0</p>
+        </div>
+    </div>
+
+    <!-- Active Link Highlighting Script -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    const id = entry.target.getAttribute('id');
+                    if (entry.intersectionRatio > 0.5) {
+                        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+                        const activeLink = document.querySelector(`.nav-item a[href="#${id}"]`);
+                        if (activeLink) activeLink.parentElement.classList.add('active');
+                    }
+                });
+            }, { threshold: [0.2, 0.5, 0.8] });
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
