@@ -547,6 +547,66 @@
             }
         }
 
+        /* Explicit Landscape Mode Override (Ensures horizontal desktop layout on rotation) */
+        @media (orientation: landscape), (min-aspect-ratio: 1/1) {
+            .org-chart-container {
+                padding: 2rem 1.5rem !important;
+            }
+            .org-chart {
+                align-items: center !important;
+                gap: 1.25rem !important;
+                padding-left: 0 !important;
+            }
+            .org-chart::before {
+                display: none !important;
+            }
+            .org-node-president {
+                margin-left: 0 !important;
+                text-align: center !important;
+            }
+            .org-line-vertical {
+                display: block !important;
+            }
+            .org-pillars {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 1.5rem !important;
+                margin-left: 0 !important;
+            }
+            .org-node-pillar {
+                text-align: center !important;
+            }
+            .org-node-pillar::before {
+                display: none !important;
+            }
+            .org-divider-label {
+                margin: 0.5rem 0 !important;
+                align-self: center !important;
+                text-align: center !important;
+            }
+            .org-divider-label::before {
+                display: none !important;
+            }
+            .org-sections {
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 1rem !important;
+                margin-left: 0 !important;
+            }
+            .org-sections::before {
+                display: none !important;
+            }
+            .org-node-section {
+                text-align: center !important;
+            }
+            .org-node-section::before {
+                display: none !important;
+            }
+            .org-note-box {
+                margin-left: 0 !important;
+                max-width: 950px !important;
+                text-align: center !important;
+            }
+        }
+
         /* Timeline styling */
         .timeline {
             position: relative;
