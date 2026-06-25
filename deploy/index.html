@@ -419,21 +419,131 @@
         }
 
         @media (max-width: 768px) {
+            .org-chart-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .org-chart {
+                align-items: stretch;
+                gap: 0.75rem;
+                position: relative;
+                padding-left: 15px;
+            }
+
+            /* Draw a vertical main trunk line down the left */
+            .org-chart::before {
+                content: '';
+                position: absolute;
+                top: 40px; /* Start below the president card */
+                bottom: 40px;
+                left: 15px;
+                width: 2px;
+                background-color: #cbd5e1;
+                z-index: 0;
+            }
+
+            /* President Node */
+            .org-node-president {
+                max-width: 100%;
+                margin-left: 15px;
+                z-index: 1;
+                text-align: center; /* Keep president centered for visual focus */
+            }
+
+            /* Hide the vertical connector line divs on mobile */
+            .org-line-vertical {
+                display: none !important;
+            }
+
             .org-pillars {
                 grid-template-columns: 1fr;
                 gap: 0.75rem;
+                margin-left: 30px; /* Indent the pillars */
+                position: relative;
             }
+
             .org-node-pillar {
-                max-width: 280px;
-                margin: 0 auto;
+                max-width: 100%;
+                position: relative;
+                z-index: 1;
+                text-align: left;
             }
+
+            /* Horizontal branch lines for pillars */
+            .org-node-pillar::before {
+                content: '';
+                position: absolute;
+                top: 55px; /* Aligns with the center of the node card content */
+                left: -30px;
+                width: 30px;
+                height: 2px;
+                background-color: #cbd5e1;
+                z-index: 0;
+            }
+
+            /* Divider label */
+            .org-divider-label {
+                margin: 1rem 0 1rem 30px;
+                align-self: flex-start;
+                z-index: 1;
+                position: relative;
+                text-align: left;
+            }
+
+            .org-divider-label::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: -30px;
+                width: 30px;
+                height: 2px;
+                background-color: #cbd5e1;
+                z-index: 0;
+            }
+
+            /* Sections container */
             .org-sections {
                 grid-template-columns: 1fr;
                 gap: 0.75rem;
+                margin-left: 60px; /* Indent sections further */
+                position: relative;
             }
+
             .org-node-section {
-                max-width: 280px;
-                margin: 0 auto;
+                max-width: 100%;
+                position: relative;
+                z-index: 1;
+                text-align: left;
+            }
+
+            /* Horizontal branch lines for sections */
+            .org-node-section::before {
+                content: '';
+                position: absolute;
+                top: 40px; /* Aligns with the center of the section node card content */
+                left: -30px;
+                width: 30px;
+                height: 2px;
+                background-color: #cbd5e1;
+                z-index: 0;
+            }
+            
+            /* A secondary vertical line for sections under the divider label */
+            .org-sections::before {
+                content: '';
+                position: absolute;
+                top: -20px;
+                bottom: 30px;
+                left: -30px;
+                width: 2px;
+                background-color: #cbd5e1;
+                z-index: 0;
+            }
+
+            .org-note-box {
+                margin-left: 15px;
+                max-width: calc(100% - 15px);
+                text-align: left;
             }
         }
 
